@@ -9,7 +9,7 @@ public class PersonVO implements Serializable {
 
 	private Long id;
 	private String firstName;
-	private String lasttName;
+	private String lastName;
 	private String anddress;
 	private String gender;
 	
@@ -33,19 +33,19 @@ public class PersonVO implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
-		return lasttName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
-		this.lasttName = lasttName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getAnddress() {
+	public String getAddress() {
 		return anddress;
 	}
 
-	public void setAnddress(String anddress) {
+	public void setAddress(String anddress) {
 		this.anddress = anddress;
 	}
 
@@ -65,7 +65,7 @@ public class PersonVO implements Serializable {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lasttName == null) ? 0 : lasttName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
 
@@ -98,10 +98,10 @@ public class PersonVO implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (lasttName == null) {
-			if (other.lasttName != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!lasttName.equals(other.lasttName))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
 	}

@@ -23,10 +23,10 @@ public class Person implements Serializable {
 	private String firstName;
 	
 	@Column(name = "last_name", nullable = false, length = 80)
-	private String lasttName;
+	private String lastName;
 	
 	@Column(nullable = false, length = 100)
-	private String anddress;
+	private String address;
 	
 	@Column(nullable = false, length = 6)
 	private String gender;
@@ -50,20 +50,20 @@ public class Person implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
-		return lasttName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
-		this.lasttName = lasttName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getAnddress() {
-		return anddress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAnddress(String anddress) {
-		this.anddress = anddress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getGender() {
@@ -78,11 +78,11 @@ public class Person implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anddress == null) ? 0 : anddress.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lasttName == null) ? 0 : lasttName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
 
@@ -95,10 +95,10 @@ public class Person implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (anddress == null) {
-			if (other.anddress != null)
+		if (address == null) {
+			if (other.address != null)
 				return false;
-		} else if (!anddress.equals(other.anddress))
+		} else if (!address.equals(other.address))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -115,10 +115,10 @@ public class Person implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (lasttName == null) {
-			if (other.lasttName != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!lasttName.equals(other.lasttName))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
 	}
