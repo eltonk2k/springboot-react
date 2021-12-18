@@ -1,4 +1,4 @@
-package br.com.projectspring.model;
+package br.com.projectspring.data.model;
 
 import java.io.Serializable;
 
