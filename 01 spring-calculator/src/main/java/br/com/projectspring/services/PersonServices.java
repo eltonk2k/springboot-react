@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.projectspring.converter.DozerConverter;
 import br.com.projectspring.data.model.Person;
 import br.com.projectspring.data.vo.PersonVO;
+import br.com.projectspring.data.vo.v2.PersonVOV2;
 import br.com.projectspring.exception.ResourceNotFoundException;
 import br.com.projectspring.repository.PersonRepository;
 
@@ -20,6 +21,12 @@ public class PersonServices {
 	public PersonVO create(PersonVO person) {
 		var entity = DozerConverter.parseObject(person, Person.class);
 		var vo = DozerConverter.parseObject(repository.save(entity), PersonVO.class);
+		return vo;
+	}
+	
+	public PersonVOV2 createV2(PersonVOV2 person) {
+		var entity = DozerConverter.parseObject(person, Person.class);
+		var vo = DozerConverter.parseObject(repository.save(entity), PersonVOV2.class);
 		return vo;
 	}
 	
