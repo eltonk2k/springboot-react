@@ -21,7 +21,7 @@ import br.com.projectspring.services.BookServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value= "Book Endpoint", description = "Description for book", tags = {"Book Endpoint"})
+@Api(tags = "Book Endpoint")
 @RestController
 @RequestMapping("/api/book/v1")
 public class BookController {
@@ -39,6 +39,7 @@ public class BookController {
 	}
 	
 	
+	@ApiOperation(value = "Find a specific book by your ID")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml"})
 	public BookVO findById(@PathVariable("id") Long id) {
 		BookVO bookVO = service.findById(id);

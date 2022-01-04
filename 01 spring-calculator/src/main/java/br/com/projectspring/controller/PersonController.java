@@ -22,7 +22,7 @@ import br.com.projectspring.services.PersonServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value= "Person Endpoint", description = "Description for person", tags = {"Person Endpoint"})
+@Api(tags = "Person Endpoint")
 @RestController
 @RequestMapping("/api/person/v1")
 public class PersonController {
@@ -39,7 +39,7 @@ public class PersonController {
 		return persons;
 	}
 	
-	
+	@ApiOperation(value = "Find a specific person by your ID")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml"})
 	public PersonVO findById(@PathVariable("id") Long id) {
 		PersonVO personVO = service.findById(id);
@@ -47,6 +47,7 @@ public class PersonController {
 		return personVO;
 	}
 	
+	@ApiOperation(value = "Create a new person")
 	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = { "application/json", "application/xml", "application/x-yaml"})
 	public PersonVO create(@RequestBody PersonVO person) {
 		PersonVO personVO = service.create(person);
@@ -60,7 +61,7 @@ public class PersonController {
 		return service.createV2(person);
 	}
 		
-	
+	@ApiOperation(value = "To update a person")
 	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = { "application/json", "application/xml", "application/x-yaml"})
 	public PersonVO update(@RequestBody PersonVO person) {
 		PersonVO personVO = service.update(person);
@@ -69,6 +70,7 @@ public class PersonController {
 		
 	}
 	
+	@ApiOperation(value = "Delete a specific person by your ID")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		service.delete(id);
