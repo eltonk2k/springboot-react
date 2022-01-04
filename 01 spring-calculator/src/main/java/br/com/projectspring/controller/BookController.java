@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projectspring.data.vo.BookVO;
 import br.com.projectspring.services.BookServices;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value= "Book Endpoint", description = "Description for book", tags = {"Book Endpoint"})
 @RestController
 @RequestMapping("/api/book/v1")
 public class BookController {
@@ -27,6 +30,7 @@ public class BookController {
 	private BookServices service;
 	
 	
+	@ApiOperation(value = "Find all people recorded")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml"})
 	public List<BookVO> findAll() {
 		List<BookVO> books = service.findAll();
