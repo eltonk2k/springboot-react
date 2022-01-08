@@ -44,9 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users").denyAll()
 			.and()
 			.apply(new JwtConfigurer(tokenProvider));
-				
-			
-		
 	}
 	
 }
