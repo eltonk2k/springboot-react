@@ -60,10 +60,11 @@ public class PersonServices {
 	
 	@Transactional
 	public PersonVO disablePerson(Long id) {
-		repository.disablePersons(id);
+		repository.disablePersons(id);			
 		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 		return DozerConverter.parseObject(entity, PersonVO.class);
 	}
+	
 	
 	public void delete(Long id) {
 		Person entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));

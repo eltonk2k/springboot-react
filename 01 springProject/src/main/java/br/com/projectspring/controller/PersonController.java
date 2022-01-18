@@ -72,8 +72,8 @@ public class PersonController {
 		
 	}
 	
-	@ApiOperation(value = "Disable a specific person by your ID")
-	@PatchMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml"})
+	@ApiOperation(value = "Disable a specific person by your ID" )
+	@PatchMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO disablePerson(@PathVariable("id") Long id) {
 		PersonVO personVO = service.disablePerson(id);
 		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
