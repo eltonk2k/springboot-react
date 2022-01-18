@@ -3,13 +3,15 @@ package br.com.projectspring.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,17 +42,20 @@ public class PersonController {
 	
 	@ApiOperation(value = "Find all people recorded")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml"})
-	public List<PersonVO> findAll(@RequestParam(value="page", defaultValue = "0") int page, 
+	public ResponseEntity<PagedResources<PersonVO>> findAll(
+			@RequestParam(value="page", defaultValue = "0") int page, 
 			@RequestParam(value="limit", defaultValue = "12") int limit,
-			@RequestParam(value="direction", defaultValue = "asc") String direction) {
+			@RequestParam(value="direction", defaultValue = "asc") String direction,
+			PagedResourcesAssembler assembler) {
 		
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "firstName"));
-		List<PersonVO> persons = service.findAll(pageable);
+		Page<PersonVO> persons = service.findAll(pageable);
 		persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
-		return persons;
+		return new ResponseEntity<>(assembler.toResource(persons), HttpStatus.OK);
 	}
+	
 	
 	@ApiOperation(value = "Find a specific person by your ID")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml"})
@@ -59,6 +64,7 @@ public class PersonController {
 		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		return personVO;
 	}
+	
 	
 	@ApiOperation(value = "Create a new person")
 	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = { "application/json", "application/xml", "application/x-yaml"})
@@ -69,10 +75,12 @@ public class PersonController {
 		
 	}
 	
+	
 	@PostMapping("/v2")
 	public PersonVOV2 createV2(@RequestBody PersonVOV2 person) {
 		return service.createV2(person);
 	}
+	
 		
 	@ApiOperation(value = "To update a person")
 	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = { "application/json", "application/xml", "application/x-yaml"})
@@ -83,6 +91,7 @@ public class PersonController {
 		
 	}
 	
+	
 	@ApiOperation(value = "Disable a specific person by your ID" )
 	@PatchMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO disablePerson(@PathVariable("id") Long id) {
@@ -90,6 +99,7 @@ public class PersonController {
 		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		return personVO;
 	}
+	
 	
 	@ApiOperation(value = "Delete a specific person by your ID")
 	@DeleteMapping("/{id}")
