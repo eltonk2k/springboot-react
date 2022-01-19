@@ -36,6 +36,8 @@ public class BookController {
 	@Autowired
 	private BookServices service;
 	
+	@Autowired
+	private PagedResourcesAssembler<BookVO> assembler;
 	
 	
 	@ApiOperation(value = "Find all people recorded")
@@ -43,8 +45,7 @@ public class BookController {
 	public ResponseEntity<?> findAll(
 			@RequestParam(value="page", defaultValue = "0") int page,
 			@RequestParam(value="limit", defaultValue = "12") int limit,
-			@RequestParam(value="direction", defaultValue = "asc") String direction,
-			PagedResourcesAssembler assembler) {
+			@RequestParam(value="direction", defaultValue = "asc") String direction) {
 		
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "title"));
