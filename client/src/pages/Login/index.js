@@ -6,7 +6,7 @@ import padlock from '../../assets/padlock.png';
 
 export default function Login({}) {
     return (
-        <div className='login-container'>
+        <div className="login-container">
             <section className="form">
             <img src={logoImage} alt="Erudio Logo"/>
             <form>
@@ -14,7 +14,7 @@ export default function Login({}) {
                 <input placeholder="Username" />
                 <input type="password" placeholder="Password" />
 
-                <button type="submit">Login</button>
+                <button className="button" type="submit">Login</button>
             </form>
             </section>
 
