@@ -31,7 +31,7 @@ export default function NewBook() {
         }
 
         const header = {
-                
+            Authorization: `Bearer ${accessToken}` 
         }
 
         try {
